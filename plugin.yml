@@ -1,0 +1,57 @@
+name: DirectSupport
+main: com.pqqqqq.directsupport.bukkit.DirectSupportPlugin
+version: '1.04c'
+author: Pqqqqq
+description: A direct support channel/ticket plugin
+commands:
+  ds:
+    description: The main plugin support command
+    usage: /<command> help
+    aliases: [directsupport, directs, support, ticket, tickets]
+permissions:
+  ds.admin:
+    description: All DirectSupport Commands
+    children:
+      ds.mod: true
+      ds.spy: true
+      ds.block-messages: true
+      ds.say: true
+      ds.reload: true
+      ds.delete: true
+      ds.view: true
+  ds.mod:
+    description: Ability to accept tickets, and get a list of done and active tickets
+    children:
+      ds.accept: true
+      ds.list: true
+      ds.completed: true
+  ds.create-ticket:
+    description: Ability to create a help ticket
+    default: op
+  ds.accept:
+    description: Ability to accept ticket requests
+    default: op
+  ds.spy:
+    description: Ability to spy on all tickets
+    default: op
+  ds.block-messages:
+    description: Ability to block incoming ticket request messages
+    default: op
+  ds.say:
+    description: Ability to say messages into others' tickets
+    default: op
+  ds.list:
+    description: Ability to get a list of active tickets
+    default: op
+  ds.completed:
+    description: Ability to get a list of completed tickets
+    default: op
+  ds.reload:
+    description: Ability to reload plugin config
+    default: op
+  ds.delete:
+    description: Ability to delete tickets without accepting them
+    default: op
+  ds.view:
+    description: Ability to view a ticket conversation
+    default: op

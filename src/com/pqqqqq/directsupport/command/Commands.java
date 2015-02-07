@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -547,6 +548,64 @@ public class Commands {
 
 		sender.sendMessage(ChatColor.DARK_AQUA + "[DirectSupport] " + ChatColor.AQUA + "Reloaded.");
 		return true;
+	}
+	
+	@Command(
+            permissions = { "ds.transfer", "ds.admin" },
+            aliases = { "transfer" },
+            description = "Transfers the active ticket to another admin",
+            usage = "/ds transfer <id> <to>",
+            example = "/ds transfer 5 chengzi")
+	public boolean transfer(CommandSender sender, String... args)
+	{
+	    if (args.length <= 0) {
+            sender.sendMessage(ChatColor.DARK_AQUA + "[DirectSupport] " + ChatColor.AQUA + "Usage: /ds delete <id>.");
+            return true;
+        }
+
+        int id;
+
+        try {
+            id = Integer.parseInt(args[0]);
+        } catch (NumberFormatException e) {
+            sender.sendMessage(ChatColor.DARK_RED + "[DirectSupport] " + ChatColor.RED + "The id must be a number!");
+            return true;
+        }
+        
+        Player helper = Bukkit.getPlayer(args[1]);
+        
+        if (helper == null) {
+            sender.sendMessage(ChatColor.DARK_RED + "[DirectSupport] " + ChatColor.RED + "The target admin not found or isn't online.");
+            return true;
+        }
+
+        ArrayList<Ticket> tcks = new ArrayList<Ticket>();
+        tcks.addAll(ds.getActiveTickets());
+
+        for (Ticket ticket : tcks) {
+            if (ticket.getId() == id){
+                final Player creator = ticket.getCreator();
+                final Player oldHelper = ticket.getHelper();
+                ticket.setHelper(helper);
+                creator.sendMessage(ChatColor.DARK_AQUA + "[DirectSupport] " + ChatColor.AQUA + "Your ticket has been transfered to " + helper.getName() +  ".");
+                sender.sendMessage(ChatColor.DARK_AQUA + "[DirectSupport] " + ChatColor.AQUA + "You transfered the ticket to " + helper.getName() +  ".");
+                helper.sendMessage(ChatColor.DARK_AQUA + "[DirectSupport] " + ChatColor.AQUA + "You are now assigning ticket #" + id +  ".");
+                oldHelper.sendMessage(ChatColor.DARK_AQUA + "[DirectSupport] " + ChatColor.AQUA + "The ticket you were helping has been transfered to " + helper.getName() +  ".");
+                
+                for (String s : ds.getSpies()) {
+                    Player spy = ds.getPlugin().getServer().getPlayerExact(s);
+
+                    if (spy == null)
+                        continue;
+
+                    if (!spy.equals(creator) && !spy.equals(helper) && !spy.equals(sender))
+                        spy.sendMessage(ChatColor.DARK_AQUA + "[DirectSupport] Ticket " + ChatColor.AQUA + "#" + ticket.getId()
+                                + ChatColor.DARK_AQUA + " was transfered from " + oldHelper.getName() + " to " + helper.getName() + ".");
+                }
+                break;
+            }
+        }
+	    return true;
 	}
 
 	@Command(

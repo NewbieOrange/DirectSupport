@@ -1,7 +1,7 @@
 name: DirectSupport
 main: com.pqqqqq.directsupport.bukkit.DirectSupportPlugin
-version: '1.04c'
-author: Pqqqqq
+version: '1.05'
+authors: [Pqqqqq, chengzi368]
 description: A direct support channel/ticket plugin
 commands:
   ds:
@@ -18,6 +18,7 @@ permissions:
       ds.say: true
       ds.reload: true
       ds.delete: true
+      ds.transfer: true
       ds.view: true
   ds.mod:
     description: Ability to accept tickets, and get a list of done and active tickets
@@ -48,6 +49,9 @@ permissions:
     default: op
   ds.reload:
     description: Ability to reload plugin config
+    default: op
+  ds.transfer:
+    description: Ability to transfer tickets to another admin
     default: op
   ds.delete:
     description: Ability to delete tickets without accepting them

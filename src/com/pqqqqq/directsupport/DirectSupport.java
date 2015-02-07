@@ -39,6 +39,7 @@ public class DirectSupport {
 	private int							donePerPage;
 	private int							convoPerPage;
 	private int							reminderDelay;
+	private boolean                     blockOtherChats;
 	private boolean						disallowRequests;
 	private boolean						reminderEnabled;
 	private SimpleDateFormat			dateFormat;
@@ -263,6 +264,14 @@ public class DirectSupport {
 		this.convoPerPage = convoPerPage;
 	}
 
+	public boolean doesBlockOtherChats() {
+        return blockOtherChats;
+    }
+
+    public void setBlockOtherChats(boolean blockOtherChats) {
+        this.blockOtherChats = blockOtherChats;
+    }
+	
 	public boolean doesDisallowRequests() {
 		return disallowRequests;
 	}

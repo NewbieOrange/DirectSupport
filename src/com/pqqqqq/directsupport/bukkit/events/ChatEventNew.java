@@ -77,15 +77,16 @@ public class ChatEventNew implements Listener {
 			return;
 		}
 
-		for (Ticket ticket : ds.getActiveTickets()) {
-			Player helper = ticket.getHelper();
-			Player creator = ticket.getCreator();
+		if (ds.doesBlockOtherChats())
+		    for (Ticket ticket : ds.getActiveTickets()) {
+		        Player helper = ticket.getHelper();
+		        Player creator = ticket.getCreator();
 
-			if (helper == null || ticket.isCompleted())
-				continue;
-
-			event.getRecipients().remove(creator);
-			event.getRecipients().remove(helper);
-		}
+		        if (helper == null || ticket.isCompleted())
+		            continue;
+		        
+		        event.getRecipients().remove(creator);
+		        event.getRecipients().remove(helper);
+		    }
 	}
 }

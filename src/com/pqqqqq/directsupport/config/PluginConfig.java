@@ -67,6 +67,7 @@ public class PluginConfig implements Config {
 			ds.setConversationMessagesPerPage(ConfigUtil.getInt(cfg, file, "general.entires-per-page.convo-messages", 7));
 			ds.setTicketMaxNameSize(ConfigUtil.getInt(cfg, file, "general.tickets.max-name-size", 50));
 			ds.setCreationDelay(ConfigUtil.getInt(cfg, file, "general.tickets.delay-after-cancellation", 10));
+			ds.setBlockOtherChats(ConfigUtil.getBoolean(cfg, file, "general.tickets.block-other-chats", true));
 			ds.setDisallowRequests(ConfigUtil.getBoolean(cfg, file, "general.tickets.disallow-creation-when-no-ops", true));
 			ds.setReminderEnabled(ConfigUtil.getBoolean(cfg, file, "general.ticket-reminders.enabled", true));
 			ds.setReminderDelay(Math.max(1, ConfigUtil.getInt(cfg, file, "general.ticket-reminders.delay", 60)));

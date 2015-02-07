@@ -671,11 +671,11 @@ public class Commands {
 
 			if (ds.isOldEvents()) {
 				org.bukkit.event.player.PlayerChatEvent event = new org.bukkit.event.player.PlayerChatEvent(player, message, message,
-						new HashSet<Player>(Arrays.asList(ds.getPlugin().getServer().getOnlinePlayers())));
+						new HashSet<Player>(ds.getPlugin().getServer().getOnlinePlayers()));
 				ds.getPlugin().getServer().getPluginManager().callEvent(event);
 			} else {
 				org.bukkit.event.player.AsyncPlayerChatEvent event = new org.bukkit.event.player.AsyncPlayerChatEvent(false, player, message,
-						new HashSet<Player>(Arrays.asList(ds.getPlugin().getServer().getOnlinePlayers())));
+						new HashSet<Player>(ds.getPlugin().getServer().getOnlinePlayers()));
 				ds.getPlugin().getServer().getPluginManager().callEvent(event);
 			}
 

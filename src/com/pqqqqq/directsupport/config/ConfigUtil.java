@@ -43,7 +43,7 @@ public class ConfigUtil {
 
 	public static List<String> getStringList(YamlConfiguration cfg, File file, String path, String... def) {
 		if (!cfg.isSet(path)) {
-			cfg.set(path, (List<String>) new ArrayList<String>(Arrays.asList(def)));
+			cfg.set(path, new ArrayList<String>(Arrays.asList(def)));
 
 			return new ArrayList<String>(Arrays.asList(def));
 		}

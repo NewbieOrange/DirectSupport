@@ -122,7 +122,7 @@ public class DirectSupport {
 			log("Metrics could not be loaded.");
 		}
 
-		getPlugin().getServer().getScheduler().scheduleAsyncRepeatingTask(getPlugin(), new TicketReminder(this), 0, reminderDelay * 20);
+		getPlugin().getServer().getScheduler().runTaskTimerAsynchronously(getPlugin(),  new TicketReminder(this), 0L, reminderDelay * 20L);
 		log("Successfully loaded");
 	}
 

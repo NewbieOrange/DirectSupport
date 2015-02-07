@@ -588,6 +588,9 @@ public class Commands {
 
         for (Ticket ticket : tcks) {
             if (ticket.getId() == id){
+                if (ticket.isCompleted())
+                    continue;
+                
                 final Player creator = ticket.getCreator();
                 final Player oldHelper = ticket.getHelper();
                 ticket.setHelper(helper);
@@ -606,9 +609,11 @@ public class Commands {
                         spy.sendMessage(ChatColor.DARK_AQUA + "[DirectSupport] Ticket " + ChatColor.AQUA + "#" + ticket.getId()
                                 + ChatColor.DARK_AQUA + " was transfered from " + oldHelper.getName() + " to " + helper.getName() + ".");
                 }
-                break;
+                return true;
             }
         }
+        
+        sender.sendMessage(ChatColor.DARK_RED + "[DirectSupport] " + ChatColor.RED + "There is no active ticket with that id!");
 	    return true;
 	}
 

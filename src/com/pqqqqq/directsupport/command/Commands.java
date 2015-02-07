@@ -559,7 +559,7 @@ public class Commands {
 	public boolean transfer(CommandSender sender, String... args)
 	{
 	    if (args.length <= 0) {
-            sender.sendMessage(ChatColor.DARK_AQUA + "[DirectSupport] " + ChatColor.AQUA + "Usage: /ds delete <id>.");
+            sender.sendMessage(ChatColor.DARK_AQUA + "[DirectSupport] " + ChatColor.AQUA + "Usage: /ds transfer <id> <to>.");
             return true;
         }
 
@@ -575,7 +575,11 @@ public class Commands {
         Player helper = Bukkit.getPlayer(args[1]);
         
         if (helper == null) {
-            sender.sendMessage(ChatColor.DARK_RED + "[DirectSupport] " + ChatColor.RED + "The target admin not found or isn't online.");
+            sender.sendMessage(ChatColor.DARK_RED + "[DirectSupport] " + ChatColor.RED + "The target helper not found or isn't online.");
+            return true;
+        }
+        else if (!helper.hasPermission("ds.accept")) {
+            sender.sendMessage(ChatColor.DARK_RED + "[DirectSupport] " + ChatColor.RED + "The target helper can't accept any tickets.");
             return true;
         }
 

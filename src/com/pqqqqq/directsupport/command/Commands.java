@@ -586,6 +586,12 @@ public class Commands {
         ArrayList<Ticket> tcks = new ArrayList<Ticket>();
         tcks.addAll(ds.getActiveTickets());
 
+        int helperTicketAmount = 0;
+        for (Ticket ticket : tcks) {
+            if (ticket.getHelper().equals(helper))
+                helperTicketAmount++;
+        }
+        
         for (Ticket ticket : tcks) {
             if (ticket.getId() == id){
                 if (ticket.isCompleted())
@@ -593,6 +599,12 @@ public class Commands {
                 
                 final Player creator = ticket.getCreator();
                 final Player oldHelper = ticket.getHelper();
+                
+                if (helperTicketAmount > 0) {
+                    sender.sendMessage(ChatColor.DARK_RED + "[DirectSupport] " + ChatColor.RED + "You can't transfer a ticket to who is already on tickets.");
+                    return true;
+                }
+                
                 ticket.setHelper(helper);
                 creator.sendMessage(ChatColor.DARK_AQUA + "[DirectSupport] " + ChatColor.AQUA + "Your ticket has been transfered to " + helper.getName() +  ".");
                 sender.sendMessage(ChatColor.DARK_AQUA + "[DirectSupport] " + ChatColor.AQUA + "You transfered the ticket to " + helper.getName() +  ".");

@@ -69,6 +69,7 @@ public class PluginConfig implements Config {
 			ds.setCreationDelay(ConfigUtil.getInt(cfg, file, "general.tickets.delay-after-cancellation", 10));
 			ds.setBlockOtherChats(ConfigUtil.getBoolean(cfg, file, "general.tickets.block-other-chats", true));
 			ds.setDisallowRequests(ConfigUtil.getBoolean(cfg, file, "general.tickets.disallow-creation-when-no-ops", true));
+			ds.setTransferIfNoTicket(ConfigUtil.getBoolean(cfg, file, "general.tickets.transfer-only-if-target-is-on-no-tickets", true));
 			ds.setReminderEnabled(ConfigUtil.getBoolean(cfg, file, "general.ticket-reminders.enabled", true));
 			ds.setReminderDelay(Math.max(1, ConfigUtil.getInt(cfg, file, "general.ticket-reminders.delay", 60)));
 			cfg.save(file);

@@ -41,6 +41,7 @@ public class DirectSupport {
 	private int							reminderDelay;
 	private boolean                     blockOtherChats;
 	private boolean						disallowRequests;
+	private boolean                     transferIfNoTicket;
 	private boolean						reminderEnabled;
 	private SimpleDateFormat			dateFormat;
 
@@ -279,6 +280,14 @@ public class DirectSupport {
 	public void setDisallowRequests(boolean disallowRequests) {
 		this.disallowRequests = disallowRequests;
 	}
+	
+	public boolean doesTransferIfNoTicket() {
+        return transferIfNoTicket;
+    }
+
+    public void setTransferIfNoTicket(boolean transferIfNoTicket) {
+        this.transferIfNoTicket = transferIfNoTicket;
+    }
 
 	public int getReminderDelay() {
 		return reminderDelay;
